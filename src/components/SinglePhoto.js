@@ -7,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles({
   card: {
@@ -51,4 +50,4 @@ const SinglePhoto = ({id, img, title, author, linkUrl, history, match}) => {
   );
 }
 
-export default withRouter(SinglePhoto)
+export default SinglePhoto

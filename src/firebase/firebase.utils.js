@@ -2,41 +2,26 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
+
 const firebaseConfig = {
-    
-  };
+   apiKey: "AIzaSyCnEkcpYL5FOvxdF7nE2HbzETbPZh-qaQY",
+   authDomain: "code-gallery.firebaseapp.com",
+   databaseURL: "https://code-gallery.firebaseio.com",
+   projectId: "code-gallery",
+   storageBucket: "code-gallery.appspot.com",
+   messagingSenderId: "277365748013",
+   appId: "1:277365748013:web:b307d1ce33bae73f62a3a4",
+   measurementId: "G-ESY4EHF7DD"
+ };
 
-  firebase.initializeApp(firebaseConfig);
+ firebase.initializeApp(firebaseConfig);
 
-  export const createUserProfileDoc = async (userAuth, additionalData) => {
-    if (!userAuth) return;
+ export const auth = firebase.auth();
+ export const firestore = firebase.firestore();
 
-  const userRef = firestore.doc(`users/${userAuth.uid}`); // save the reference into a variable first
+ const provider = new firebase.auth.GoogleAuthProvider();
+ provider.setCustomParameters({prompt: 'select_account'})
 
-  const snapShot = await userRef.get(); // And then get the data (if the data is not there we will see 'exist' property of snapShot is false  )
+ export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
-  if(!snapShot.exists){
-    const {displayName, email} = userAuth;
-    const createdAt = new Date();
-    try{
-      await userRef.set({
-        displayName,
-        email,
-        createdAt,
-        ...additionalData
-      });
-    }catch (error){
-      console.log('error creating user', error.message);
-    }
-  }
-  return userRef;
-};
-
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({prompt: 'select_account'});
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
-
-export default firebase;
+ export default firebase;

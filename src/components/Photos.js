@@ -45,7 +45,7 @@ const Photos = [
       cols: 2,
       linkUrl: ''
       },
-      {
+    {
         id: 9089,
         img: 'https://cdn.pixabay.com/photo/2019/12/28/14/00/chrome-hill-4724723__340.jpg',
         title: 'Vegetables',
